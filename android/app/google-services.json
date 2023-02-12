@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "49065987595",
+    "project_id": "bobde6-multi-store",
+    "storage_bucket": "bobde6-multi-store.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:49065987595:android:5f26a0faad37bd91e4810e",
+        "android_client_info": {
+          "package_name": "com.bubaSanneh.bobde6_multi_store"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "49065987595-g7ho0hlgej6rvnt744dm1e2gavmm6ojf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCA1Bp4bpyc5XFfpXjPXQ0vcJaANfARxTs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "49065987595-g7ho0hlgej6rvnt744dm1e2gavmm6ojf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
