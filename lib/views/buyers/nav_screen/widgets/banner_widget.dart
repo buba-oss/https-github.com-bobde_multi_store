@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
 class BannerWidget extends StatefulWidget {
+  const BannerWidget({super.key});
+
   @override
   State<BannerWidget> createState() => _BannerWidgetState();
 }

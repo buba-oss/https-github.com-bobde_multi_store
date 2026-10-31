@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SearchInputWidget extends StatelessWidget {
-  const SearchInputWidget({Key key}) : super(key: key);
+  const SearchInputWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

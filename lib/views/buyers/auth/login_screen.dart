@@ -5,6 +5,8 @@ import 'package:bobde6_multi_store/views/buyers/main_screen.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
@@ -12,20 +14,27 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final AuthController _authController = AuthController();
-  String email;
-  String password;
+  String email = '';
+  String password = '';
   bool _isloading = false;
 
   _loginUsers() async {
     setState(() {
       _isloading = true;
     });
-    if (_formKey.currentState.validate()) {
-      await _authController.loginUser(email, password);
-      return Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) {
-        return MainScreen();
-      }));
+    if (_formKey.currentState!.validate()) {
+      String res = await _authController.loginUser(email, password);
+      if (res == 'success') {
+        return Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) {
+          return const MainScreen();
+        }));
+      } else {
+        setState(() {
+          _isloading = false;
+        });
+        return showSnack(context, res);
+      }
     } else {
       setState(() {
         _isloading = false;
@@ -54,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 padding: const EdgeInsets.all(13.0),
                 child: TextFormField(
                   validator: (value) {
-                    if (value.isEmpty) {
+                    if (value == null || value.isEmpty) {
                       return 'Please Email must not be empty';
                     } else {
                       return null;
@@ -73,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: TextFormField(
                   obscureText: true,
                   validator: (value) {
-                    if (value.isEmpty) {
+                    if (value == null || value.isEmpty) {
                       return 'Please password must not be empty';
                     } else {
                       return null;
@@ -124,12 +133,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return RegisterScreen();
+                            return const RegisterScreen();
                           },
                         ),
                       );
                     },
-                     Widget: Text(
+                    child: Text(
                       'Register',
                     ),
                   ),

@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({Key key}) : super(key: key);
+  const MainScreen({super.key});
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -18,13 +18,13 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _pageIndex = 0;
 
-  List<Widget> _pages = [
-    HomeScreen(),
-    CategoryScreen(),
-    StoreScreen(),
-    CartScreen(),
-    SearchScreen(),
-    AccountScreen(),
+  final List<Widget> _pages = [
+    const HomeScreen(),
+    const CategoryScreen(),
+    const StoreScreen(),
+    const CartScreen(),
+    const SearchScreen(),
+    const AccountScreen(),
   ];
 
   @override

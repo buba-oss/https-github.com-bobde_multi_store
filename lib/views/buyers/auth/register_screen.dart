@@ -5,9 +5,12 @@ import 'package:bobde6_multi_store/views/buyers/auth/login_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+
 import '../../../utils/show_snackBar.dart';
 
 class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
+
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
 }
@@ -17,24 +20,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-   String email;
-
- String fullName;
-
-   String phoneNumber;
-
-   String password;
-
-  Uint8List _image;
+  String email = '';
+  String fullName = '';
+  String phoneNumber = '';
+  String password = '';
+  Uint8List? _image;
 
   _signUpUser() async {
     setState(() {});
-    if (_formKey.currentState.validate()) {
+    if (_formKey.currentState!.validate()) {
       await _authController
           .singUpUsers(email, fullName, password, phoneNumber, _image)
           .whenComplete(() {
         setState(() {
-          _formKey.currentState.reset();
+          _formKey.currentState!.reset();
         });
       });
 
@@ -46,17 +45,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   selectGalleryImage() async {
-    Uint8List im = await _authController.pickProfileImage(ImageSource.gallery);
-    setState(() {
-      _image = im;
-    });
+    Uint8List? im = await _authController.pickProfileImage(ImageSource.gallery);
+    if (im != null) {
+      setState(() {
+        _image = im;
+      });
+    }
   }
 
   selectCamaraImage() async {
-    Uint8List im = await _authController.pickProfileImage(ImageSource.camera);
-    setState(() {
-      _image = im;
-    });
+    Uint8List? im = await _authController.pickProfileImage(ImageSource.camera);
+    if (im != null) {
+      setState(() {
+        _image = im;
+      });
+    }
   }
 
   @override
@@ -79,7 +82,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ? CircleAvatar(
                             radius: 64,
                             backgroundColor: Colors.yellow.shade900,
-                            backgroundImage: MemoryImage(_image),
+                            backgroundImage: MemoryImage(_image!),
                           )
                         : CircleAvatar(
                             radius: 64,
@@ -109,7 +112,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   padding: const EdgeInsets.all(13.0),
                   child: TextFormField(
                     validator: (value) {
-                      if (value.isEmpty) {
+                      if (value == null || value.isEmpty) {
                         return 'Please Email must not be empty';
                       } else {
                         return null;
@@ -127,7 +130,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   padding: const EdgeInsets.all(13.0),
                   child: TextFormField(
                     validator: (value) {
-                      if (value.isEmpty) {
+                      if (value == null || value.isEmpty) {
                         return 'Please Full Name must not be empty';
                       } else {
                         return null;
@@ -145,7 +148,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   padding: const EdgeInsets.all(13.0),
                   child: TextFormField(
                     validator: (value) {
-                      if (value.isEmpty) {
+                      if (value == null || value.isEmpty) {
                         return 'Please Phone Number must not be empty';
                       } else {
                         return null;
@@ -164,7 +167,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   child: TextFormField(
                     obscureText: true,
                     validator: (value) {
-                      if (value.isEmpty) {
+                      if (value == null || value.isEmpty) {
                         return 'Please Password must not be empty';
                       } else {
                         return null;
@@ -210,10 +213,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       onPressed: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          return LoginScreen();
+                          return const LoginScreen();
                         }));
                       },
-                      Widget: Text('Login'),
+                      child: Text('Login'),
                     ),
                   ],
                 ),
